@@ -9,7 +9,7 @@
 
         <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
 
-        <h1>Editar nova categoria {{ $category->title }}</h1>
+        <h1>Editar nova categoria: {{ $category->title }}</h1>
 
         </div>
 

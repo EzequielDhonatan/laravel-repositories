@@ -39,7 +39,7 @@
                                 <th scope="col">Título</th>
                                 <th scope="col">URL</th>
                                 <th scope="col">Descrição</th>
-                                <th scope="col"></th>
+                                <th width="100px"></th>
                             </tr>
 
                         </thead> <!-- thead -->
@@ -74,7 +74,11 @@
                                         </a>
                                     </th>
 
-                                    <td>...</td>
+                                    <td>
+                                    <a class="badge bg-info" href="{{ route('categories.show', $category->id) }}">
+                                        <i class="fas fa-info"></i>
+                                    </a>
+                                    </td>
                                 </tr>
 
                             @endforeach

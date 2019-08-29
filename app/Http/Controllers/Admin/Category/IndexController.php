@@ -57,7 +57,14 @@ class IndexController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = DB::table('categories')
+                        ->where('id', $id)
+                        ->first();
+
+        if (!$category)
+            return redirect()->back();
+
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
