@@ -3,7 +3,22 @@
 @section('title', 'Listagem de Categorias')
 
 @section('content_header')
-    <h1>Categorias</h1>
+
+
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+
+            <h1>Categorias</h1>
+
+            <a class="btn btn-success" href="{{ route('categories.create') }}">
+                <i class="fas fa-plus"></i>
+            </a>
+
+        </div>
+
+    </div> <!-- row -->
+
 @stop
 
 @section('content')

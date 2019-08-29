@@ -28,7 +28,7 @@ class IndexController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -39,7 +39,15 @@ class IndexController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+
+        DB::table('categories')->insert([
+            'title'         => $request->title,
+            'url'           => $request->url,
+            'description'   => $request->description
+        ]);
+
+        return redirect()->route('categories.index');
     }
 
     /**
