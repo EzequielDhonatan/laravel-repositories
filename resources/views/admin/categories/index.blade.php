@@ -34,7 +34,9 @@
 
                         @csrf
                         
-                        <input class="form-control" type="text" id="search" name="search" placeholder="Pesquisar">
+                        <input class="form-control" type="text" id="title" name="title" value="{{ $data['title'] ?? '' }}" placeholder="Título">
+                        <input class="form-control" type="text" id="url" name="url" value="{{ $data['url'] ?? '' }}" placeholder="URL">
+                        <input class="form-control" type="text" id="description" name="description" value="{{ $data['description'] ?? '' }}" placeholder="Descrição">
                         <button class="btn btn-success" type="submit">Buscar</button>
 
                     </form> <!-- form form-inline -->
