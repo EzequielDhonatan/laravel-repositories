@@ -17,7 +17,11 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')->paginate();
+        $categories = DB::table('categories')
+                        // ->orderBy('created_at', 'DESC')
+                        // ->orderBy('id', 'asc')
+                        ->orderBy('id', 'DESC')
+                        ->paginate();
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -153,6 +157,7 @@ class IndexController extends Controller
                         $query->where('description', 'LIKE', "%{$description}%");
                     }
                 })
+                ->orderBy('id', 'DESC')
                 ->paginate();
                 // ->get();
 
