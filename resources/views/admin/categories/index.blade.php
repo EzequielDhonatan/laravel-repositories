@@ -58,13 +58,8 @@
                     
                     <br>
 
-                    @if (isset($search))
-                    
-                        <p>
-                            <strong>Pesquisado:</strong> 
-                            {{ $search }}
-                        </p>
-
+                    @if (isset($data))
+                        <a href="{{ route('categories.index') }}">(x) Limpar Resultados da Pesquisa</a>
                     @endif
 
                 <div> <!-- box body -->
@@ -74,6 +69,8 @@
 
             <div class="box box-success">
                 <div class="box-body">
+
+                    @include('admin.includes.alerts')
                     
                     <table class="table table-striped">
 

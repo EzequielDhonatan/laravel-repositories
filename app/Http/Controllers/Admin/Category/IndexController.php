@@ -50,7 +50,10 @@ class IndexController extends Controller
             'description'   => $request->description
         ]);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')
+                        ->withSuccess('Cadastro realizado com sucesso!');
+                        // ->withError('Ops, Algo errado!');
+                        // ->withWarning('Ops, Perigo detectado!');
     }
 
     /**
@@ -104,7 +107,8 @@ class IndexController extends Controller
                     'description'   => $request->description
                 ]);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')
+                        ->withSuccess('Registro atualizado com sucesso!');
     }
 
     /**
@@ -119,7 +123,8 @@ class IndexController extends Controller
                 ->where('id', $id)
                 ->delete();
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')
+                        ->withSuccess('Registro deletado com sucesso!');
     }
 
     public function search(Request $request) 
