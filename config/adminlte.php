@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => 'Administrativo',
+    'logo' => 'Painel',
 
-    'logo_mini' => 'ADIM',
+    'logo_mini' => 'ADMIN',
 
     /*
     |--------------------------------------------------------------------------
