@@ -75,9 +75,11 @@
                                     </th>
 
                                     <td>
-                                    <a class="badge bg-info" href="{{ route('categories.show', $category->id) }}">
-                                        <i class="fas fa-info"></i>
-                                    </a>
+
+                                        <a href="{{ route('categories.show', $category->id) }}">
+                                            <i class="fas fa-info" style="color: blue;"></i>
+                                        </a>
+                                        
                                     </td>
                                 </tr>
 

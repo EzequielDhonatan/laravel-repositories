@@ -111,6 +111,10 @@ class IndexController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('categories')
+                ->where('id', $id)
+                ->delete();
+
+        return redirect()->route('categories.index');
     }
 }

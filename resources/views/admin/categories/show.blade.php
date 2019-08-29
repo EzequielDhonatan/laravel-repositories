@@ -41,17 +41,23 @@
 
                     <hr>
 
-                    <div class="row">
+                    <form class="form" method="POST" action="{{ route('categories.destroy', $category->id) }}">
 
-                        <div class="form-gourp col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                            
-                            <button class="btn btn-danger" type="submit">Deletar</button>
-                            
-                        </div>
+                        @csrf
 
-                        <hr>
+                        <input type="hidden" name="_method" value="DELETE">
 
-                    </div> <!-- row -->
+                        <div class="row">
+                            <div class="form-gourp col-md-12 col-sm-12 col-lg-12 col-xs-12">
+
+                                <button class="btn btn-danger" type="submit">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+
+                            </div>
+                        </div> <!-- row -->
+
+                    </form> <!-- form -->
                     
                 </div> <!-- box-body -->
             </div> <!-- box -->
