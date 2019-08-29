@@ -26,6 +26,16 @@
             <div class="box box-success">
                 <div class="box-body">
 
+                    @if ($errors->any())
+
+                        <div class="alert alert-warning">
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>    
+                            @endforeach
+                        </div>
+
+                    @endif
+
                     <form class="form" method="POST" action="{{ route('categories.store') }}">
 
                         {{ csrf_field() }}
@@ -34,12 +44,12 @@
 
                             <div class="form-gourp col-md-6 col-sm-6 col-lg-6 col-xs-6">
                                 <label for="title">Título</label>
-                                <input type="text" class="form-control" id="title" name="title">
+                                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
                             </div>
 
                             <div class="form-gourp col-md-6 col-sm-6 col-lg-6 col-xs-6">
                                 <label for="url">URL</label>
-                                <input type="text" class="form-control" id="url" name="url">
+                                <input type="text" class="form-control" id="url" name="url" value="{{ old('url') }}">
                             </div>
 
                         </div> <!-- row -->
@@ -50,7 +60,7 @@
 
                             <div class="form-gourp col-md-12 col-sm-12 col-lg-12 col-xs-12">
                                 <label for="description">Descrição</label>
-                                <textarea class="form-control" id="description" name="description" cols="30" rows="10"></textarea>
+                                <textarea class="form-control" id="description" name="description" cols="30" rows="10">{{ old('description') }}</textarea>
                             </div>
 
                         </div> <!-- row -->

@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category\Category;
+use App\Http\Requests\Admin\Category\StoreUpdateFormRequest;
 
 class IndexController extends Controller
 {
@@ -37,10 +38,8 @@ class IndexController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateFormRequest $request)
     {
-        $dataForm = $request->all();
-
         DB::table('categories')->insert([
             'title'         => $request->title,
             'url'           => $request->url,
@@ -79,7 +78,7 @@ class IndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateFormRequest $request, $id)
     {
         //
     }
