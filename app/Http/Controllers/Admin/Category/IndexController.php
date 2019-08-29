@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Category;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category\Category;
 
 class IndexController extends Controller
 {
@@ -14,7 +16,9 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return 'Categoria';
+        $categories = DB::table('categories')->get();
+
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
