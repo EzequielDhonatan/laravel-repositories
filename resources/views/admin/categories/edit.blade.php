@@ -4,12 +4,27 @@
 
 @section('content_header')
 
+    <ol class="breadcrumb">
+
+        <li>
+            <a href="{{ route('admin') }}">Dashboard</a>
+        </li>
+
+        <li>
+            <a href="{{ route('categories.index') }}">Categorias</a>
+        </li>
+
+        <li>
+            <a class="active" href="{{ route('categories.edit', $category->id) }}">Editar</a>
+        </li>
+
+    </ol> <!-- breadcrumb -->
 
     <div class="row">
 
         <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
 
-        <h1>Editar nova categoria: {{ $category->title }}</h1>
+        <h1>Editar categoria: {{ $category->title }}</h1>
 
         </div>
 

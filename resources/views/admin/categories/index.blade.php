@@ -4,6 +4,17 @@
 
 @section('content_header')
 
+    <ol class="breadcrumb">
+
+        <li>
+            <a href="{{ route('admin') }}">Dashboard</a>
+        </li>
+
+        <li>
+            <a class="active" href="{{ route('categories.index') }}">Categorias</a>
+        </li>
+
+    </ol> <!-- breadcrumb -->
 
     <div class="row">
 
@@ -11,9 +22,13 @@
 
             <h1>Categorias</h1>
 
-            <a class="btn btn-success" href="{{ route('categories.create') }}">
-                <i class="fas fa-plus"></i>
-            </a>
+            <div class="text-right">
+
+                <a class="btn btn-success" href="{{ route('categories.create') }}">
+                    <i class="fas fa-plus"></i>
+                </a>
+                
+            </div> <!-- text-right -->
 
         </div>
 

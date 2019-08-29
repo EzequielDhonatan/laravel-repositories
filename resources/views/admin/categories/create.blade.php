@@ -4,6 +4,21 @@
 
 @section('content_header')
 
+    <ol class="breadcrumb">
+
+        <li>
+            <a href="{{ route('admin') }}">Dashboard</a>
+        </li>
+
+        <li>
+            <a href="{{ route('categories.index') }}">Categorias</a>
+        </li>
+        
+        <li>
+            <a class="active" href="{{ route('categories.create') }}">Cadatrar</a>
+        </li>
+
+    </ol> <!-- breadcrumb -->
 
     <div class="row">
 
