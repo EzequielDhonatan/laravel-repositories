@@ -1,5 +1,7 @@
 <?php
 
+Route::resource('admin/categories', 'Admin\Category\IndexController');
+
 Route::get('/', function () {
     return view('welcome');
 });

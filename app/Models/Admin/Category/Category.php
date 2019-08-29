@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Category;
+namespace App\Models\Admin\Category;
 
 use Illuminate\Database\Eloquent\Model;
 
