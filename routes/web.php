@@ -1,7 +1,7 @@
 <?php
 
 Route::resource('admin/categories', 'Admin\Category\IndexController');
-Route::post('admin/categories/search', 'Admin\Category\IndexController@search')->name('categories.search');
+Route::any('admin/categories/search', 'Admin\Category\IndexController@search')->name('categories.search');
 
 Route::get('/', function () {
     return view('welcome');

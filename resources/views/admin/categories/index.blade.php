@@ -118,6 +118,12 @@
                         </tbody> <!-- tbody -->
 
                     </table> <!-- table table-striped -->
+
+                    @if (isset($data))
+                        {!! $categories->appends($data)->links() !!}
+                    @else
+                        {!! $categories->links() !!}
+                    @endif
                     
                 </div> <!-- box-body -->
             </div> <!-- box -->

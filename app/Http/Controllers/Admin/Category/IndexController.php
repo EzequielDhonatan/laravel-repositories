@@ -17,7 +17,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')->get();
+        $categories = DB::table('categories')->paginate();
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -130,7 +130,7 @@ class IndexController extends Controller
                 ->get();
         */
 
-        $data = $request->all();
+        $data = $request->except('_token');
 
         $categories = DB::table('categories')
                 ->where(function ($query) use ($data) {
@@ -153,7 +153,8 @@ class IndexController extends Controller
                         $query->where('description', 'LIKE', "%{$description}%");
                     }
                 })
-                ->get();
+                ->paginate();
+                // ->get();
 
         return view('admin.categories.index', compact('categories', 'data'));
     }

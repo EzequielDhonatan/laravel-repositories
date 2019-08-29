@@ -135,7 +135,7 @@ return [
         ['header' => 'OPÇÕES'],
         [
             'text' => 'Categorias',
-            'url'  => 'panel/categories',
+            'url'  => 'admin/categories',
         ],
         [
             'text'        => 'Produtos',
