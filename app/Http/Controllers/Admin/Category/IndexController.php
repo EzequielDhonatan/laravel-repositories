@@ -85,7 +85,15 @@ class IndexController extends Controller
      */
     public function update(StoreUpdateFormRequest $request, $id)
     {
-        return 'Editando...';
+        DB::table('categories')
+                ->where('id', $id)
+                ->update([
+                    'title'         => $request->title,
+                    'url'           => $request->url,
+                    'description'   => $request->description
+                ]);
+
+        return redirect()->route('categories.index');
     }
 
     /**
