@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => 'Painel',
+    'logo' => 'ADMIN',
 
-    'logo_mini' => 'ADMIN',
+    'logo_mini' => 'ADM',
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'panel',
+    'dashboard_url' => 'admin',
 
     'logout_url' => 'logout',
 
@@ -139,7 +139,7 @@ return [
         ],
         [
             'text'        => 'Produtos',
-            'url'         => 'panel/products',
+            'url'         => 'admin/products',
             'icon'        => 'far fa-file',
         ],
     ],
