@@ -29,6 +29,34 @@
 
             <div class="box box-success">
                 <div class="box-body">
+
+                    <form class="form form-inline" method="POST" action="{{ route('categories.search') }}">
+
+                        @csrf
+                        
+                        <input class="form-control" type="text" id="search" name="search" placeholder="Pesquisar">
+                        <button class="btn btn-success" type="submit">Buscar</button>
+
+                    </form> <!-- form form-inline -->
+                    
+                    <br>
+
+                    @if (isset($search))
+                    
+                        <p>
+                            <strong>Pesquisado:</strong> 
+                            {{ $search }}
+                        </p>
+
+                    @endif
+
+                <div> <!-- box body -->
+            <div> <!-- box box-success -->
+
+            <br>
+
+            <div class="box box-success">
+                <div class="box-body">
                     
                     <table class="table table-striped">
 

@@ -117,4 +117,17 @@ class IndexController extends Controller
 
         return redirect()->route('categories.index');
     }
+
+    public function search(Request $request) 
+    {
+        $search = $request->search;
+
+        $categories = DB::table('categories')
+                ->where('title', $search)
+                ->orWhere('url', $search)
+                ->orWhere('description', 'LIKE', "%{$search}%")
+                ->get();
+
+        return view('admin.categories.index', compact('categories', 'search'));
+    }
 }
