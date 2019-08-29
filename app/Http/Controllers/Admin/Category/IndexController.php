@@ -68,7 +68,12 @@ class IndexController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = DB::table('categories')->where('id', $id)->first();
+
+        if (!$category)
+            return redirect()->back();
+
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -80,7 +85,7 @@ class IndexController extends Controller
      */
     public function update(StoreUpdateFormRequest $request, $id)
     {
-        //
+        return 'Editando...';
     }
 
     /**

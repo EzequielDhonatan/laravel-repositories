@@ -49,10 +49,31 @@
                             @foreach ($categories as $category)
 
                                 <tr>
-                                    <th scope="row">{{ $category->id }}</th>
-                                    <td>{{ $category->title }}</td>
-                                    <td>{{ $category->url }}</td>
-                                    <td>{{ $category->description }}</td>
+
+                                    <th scope="row">
+                                        <a href="{{ route('categories.edit', $category->id) }}">
+                                            {{ $category->id }}
+                                        </a>
+                                    </th>
+
+                                    <th>
+                                        <a href="{{ route('categories.edit', $category->id) }}">
+                                            {{ $category->title }}
+                                        </a>
+                                    </th>
+
+                                    <th>
+                                        <a href="{{ route('categories.edit', $category->id) }}">
+                                            {{ $category->url }}
+                                        </a>
+                                    </th>
+
+                                    <th>
+                                        <a href="{{ route('categories.edit', $category->id) }}">
+                                            {{ $category->description }}
+                                        </a>
+                                    </th>
+
                                     <td>...</td>
                                 </tr>
 
