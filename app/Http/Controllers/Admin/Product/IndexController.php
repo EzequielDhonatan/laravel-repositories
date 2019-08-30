@@ -4,11 +4,17 @@ namespace App\Http\Controllers\Admin\Product;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Product\Product;
+use App\Models\Admin\Product\Product;
 use App\Http\Requests\Admin\Product\StoreUpdateFormRequest;
 
 class IndexController extends Controller
 {
+    protected $product;
+
+    public function __construct(Product $product)
+    {
+        $this->product = $product;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,9 @@ class IndexController extends Controller
      */
     public function index()
     {
-        //
+        $products = $this->product->with('category')->get();
+
+        return view('admin.products.index', compact('products'));
     }
 
     /**

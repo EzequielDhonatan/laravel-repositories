@@ -1,5 +1,7 @@
 <?php
 
+// Auth::routes(['register' => false]);
+
 Auth::routes();
 
 Route::get('admin', function () {
