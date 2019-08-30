@@ -82,7 +82,12 @@ class IndexController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = Category::all();
+
+        if (!$product = $this->product->find($id))
+            return redirect()->back();
+
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
