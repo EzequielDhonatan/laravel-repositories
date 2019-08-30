@@ -23,7 +23,9 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $products = $this->product->with('category')->get();
+        $products = $this->product->with('category')
+                                    ->orderBy('id', 'DESC')
+                                    ->get();
 
         return view('admin.products.index', compact('products'));
     }

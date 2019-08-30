@@ -29,11 +29,11 @@ class StoreUpdateFormRequest extends FormRequest
             
             /* DADOS DO PRODUTO
             ================================================== */
-            'category_id'           => 'required',
+            'category_id'           => 'required|exists:categories,id',
             'name'                  => "required|min:3|max:60|unique:products,name,{$id},id",
             'url'                   => "required|min:3|max:60|unique:products,price,{$id},id",
             'price'                 => 'required',
-            'description'           => 'max:2000',
+            'description'           => 'max:9000',
             
         ];
     }
