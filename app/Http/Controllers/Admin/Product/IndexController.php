@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Product\Product;
+use App\Models\Admin\Category\Category;
 use App\Http\Requests\Admin\Product\StoreUpdateFormRequest;
 
 class IndexController extends Controller
@@ -34,7 +35,9 @@ class IndexController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+
+        return view('admin.products.create', compact('categories'));
     }
 
     /**
@@ -45,7 +48,17 @@ class IndexController extends Controller
      */
     public function store(StoreUpdateFormRequest $request)
     {
-        //
+        /*
+        $category = Category::find($request->category_id);
+        $product = $category->products()->create($request->all());
+        dd($product);
+        */
+
+        $product = $this->product->create($request->all());
+
+        return redirect()
+                ->route('products.index')
+                ->withSuccess('Cadastro realizado com sucesso!');
     }
 
     /**
