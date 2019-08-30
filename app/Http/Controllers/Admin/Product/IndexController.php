@@ -99,7 +99,13 @@ class IndexController extends Controller
      */
     public function update(StoreUpdateFormRequest $request, $id)
     {
-        //
+        $product = $this->product->find($id);
+
+        $product->update($request->all());
+
+        return redirect()
+                ->route('products.index')
+                ->withSuccess('Registrado atualizado com sucesso!');
     }
 
     /**
