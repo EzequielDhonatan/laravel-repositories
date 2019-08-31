@@ -126,6 +126,10 @@ class IndexController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = $this->product->find($id)->delete();
+
+        return redirect()
+                    ->route('products.index')
+                    ->withSuccess('Registro deletado com sucesso!');
     }
 }
