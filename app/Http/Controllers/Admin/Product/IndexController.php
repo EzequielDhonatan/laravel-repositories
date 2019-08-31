@@ -132,4 +132,28 @@ class IndexController extends Controller
                     ->route('products.index')
                     ->withSuccess('Registro deletado com sucesso!');
     }
+
+    public function search(Request $request)
+    {
+        $products = $this->product
+                            ->with('category')
+                            ->where(function ($query) use ($request) {
+                                if ($request->has('name')) {
+                                    $filter = $request->name;
+                                    $query->where(function ($querySub) use ($filter) {
+                                        $querySub->where('name', 'LIKE', "%{$filter}%")
+                                                    ->orWhere('description', 'LIKE', "%{$filter}%");
+                                    });
+                                }
+
+                                if ($request->has('price')) {
+                                    $query->where('price', $request->price);
+                                }
+                            })
+                            ->toSql();
+                            dd($products);
+                            //  ->get();
+
+        return view('admin.products.index', compact('products'));
+    }
 }

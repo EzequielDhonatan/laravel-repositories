@@ -45,6 +45,28 @@
             <div class="box box-success">
                 <div class="box-body">
 
+                    <form class="form form-inline" method="POST" action="{{ route('products.search') }}">
+
+                        @csrf
+                        
+                        <input class="form-control" type="text" id="name" name="name" value="{{ $data['name'] ?? '' }}" placeholder="Nome">
+                        <input class="form-control" type="text" id="price" price="name" value="{{ $data['price'] ?? '' }}" placeholder="Preço">
+                        <button class="btn btn-success" type="submit">Buscar</button>
+
+                    </form> <!-- form form-inline -->
+                    
+                    <br>
+
+                    @if (isset($data))
+                        <a href="{{ route('products.index') }}">(x) Limpar Resultados da Pesquisa</a>
+                    @endif
+
+                <div> <!-- box body -->
+            <div> <!-- box box-success -->
+
+            <div class="box box-success">
+                <div class="box-body">
+
                     @include('admin.includes.alerts')
                     
                     <table class="table table-striped">

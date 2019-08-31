@@ -12,6 +12,7 @@ Route::resource('admin/categories', 'Admin\Category\IndexController'); ## CATEGO
 Route::any('admin/categories/search', 'Admin\Category\IndexController@search')->name('categories.search'); ## SEARCH CATEGORY (MODULE 1.0)
 
 Route::resource('admin/products', 'Admin\Product\IndexController'); ## PRODUCT (MODULE 2.0)
+Route::any('admin/products/search', 'Admin\Product\IndexController@search')->name('products.search'); ## SEARCH PRODUCT (MODULE 1.0)
 
 Route::get('/home', 'HomeController@index')->name('home');
 
