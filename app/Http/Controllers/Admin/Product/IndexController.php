@@ -37,8 +37,8 @@ class IndexController extends Controller
      */
     public function create()
     {
-        // $categories = Category::pluck('name', 'id');
-        $categories = Category::all();
+        // $categories = Category::all();
+        // $categories = Category::pluck('title', 'id');
 
         return view('admin.products.create', compact('categories'));
     }
@@ -91,8 +91,8 @@ class IndexController extends Controller
      */
     public function edit($id)
     {
-        // $categories = Category::pluck('name', 'id');
-        $categories = Category::all();
+        // $categories = Category::all();
+        // $categories = Category::pluck('title', 'id');
 
         if (!$product = $this->product->find($id))
             return redirect()->back();
@@ -150,9 +150,9 @@ class IndexController extends Controller
                                     $query->where('price', $request->price);
                                 }
                             })
-                            ->toSql();
-                            dd($products);
-                            //  ->get();
+                            // ->toSql();
+                            // dd($products);
+                            ->get();
 
         return view('admin.products.index', compact('products'));
     }

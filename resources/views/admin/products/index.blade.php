@@ -48,9 +48,17 @@
                     <form class="form form-inline" method="POST" action="{{ route('products.search') }}">
 
                         @csrf
+
+                        <select class="form-control" name="category" id="category">
+                            <option value="">Categoria</option>
+                            @foreach ($categories as $id => $category)
+                                <option value="{{ $id }}">{{ $category }}</option>
+                            @endforeach
+                        </select>
                         
                         <input class="form-control" type="text" id="name" name="name" value="{{ $data['name'] ?? '' }}" placeholder="Nome">
                         <input class="form-control" type="text" id="price" price="name" value="{{ $data['price'] ?? '' }}" placeholder="Preço">
+
                         <button class="btn btn-success" type="submit">Buscar</button>
 
                     </form> <!-- form form-inline -->
