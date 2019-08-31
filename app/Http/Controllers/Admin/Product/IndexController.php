@@ -74,7 +74,7 @@ class IndexController extends Controller
     {
         $product = $this->product->with('category')
                                     ->where('id', $id)
-                                    ->firts();
+                                    ->first();
 
         if (!$product)
             return redirect()
