@@ -37,6 +37,7 @@ class IndexController extends Controller
      */
     public function create()
     {
+        // $categories = Category::pluck('name', 'id');
         $categories = Category::all();
 
         return view('admin.products.create', compact('categories'));
@@ -82,6 +83,7 @@ class IndexController extends Controller
      */
     public function edit($id)
     {
+        // $categories = Category::pluck('name', 'id');
         $categories = Category::all();
 
         if (!$product = $this->product->find($id))

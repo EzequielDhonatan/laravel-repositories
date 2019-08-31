@@ -8,7 +8,7 @@
             <option value="">Selecione</option>
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}"
-                    @if ($category->id == $product->category_id)
+                    @if (isset($product->category_id) && $product->category_id == $category->id)
                         selected
                     @endif
                     >{{ $category->title }}</option>
