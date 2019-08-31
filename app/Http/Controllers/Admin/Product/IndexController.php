@@ -72,7 +72,15 @@ class IndexController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = $this->product->with('category')
+                                    ->where('id', $id)
+                                    ->firts();
+
+        if (!$product)
+            return redirect()
+                    ->back();
+
+        return view('admin.products.show', compact('product'));
     }
 
     /**
