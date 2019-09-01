@@ -136,9 +136,15 @@ class IndexController extends Controller
     public function search(Request $request)
     {
         $products = $this->product
+                            /* ->with([
+                                 'category' => function ($query) use ($request) {
+                                     $query->where('id', $request->category);
+                                 }
+                            ])*/
                             ->with('category')
                             ->where(function ($query) use ($request) {
-                                if ($request->has('name')) {
+
+                                if ($request->name) {
                                     $filter = $request->name;
                                     $query->where(function ($querySub) use ($filter) {
                                         $querySub->where('name', 'LIKE', "%{$filter}%")
@@ -146,8 +152,12 @@ class IndexController extends Controller
                                     });
                                 }
 
-                                if ($request->has('price')) {
+                                if ($request->price) {
                                     $query->where('price', $request->price);
+                                }
+
+                                if ($request->category) {
+                                    $query->orWhere('category_id', $request->category);
                                 }
                             })
                             // ->toSql();

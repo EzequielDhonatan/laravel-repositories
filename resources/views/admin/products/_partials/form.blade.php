@@ -7,11 +7,11 @@
         <select class="form-control" id="category_id" name="category_id">
             <option value="">Selecione</option>
             @foreach ($categories as $category)
-                <option value="{{ $category->id }}"
-                    @if (isset($product->category_id) && $product->category_id == $category->id)
+                <option value="{{ $category }}"
+                    @if (isset($product->category) && $product->category == $category)
                         selected
                     @endif
-                    >{{ $category->title }}</option>
+                    >{{ $category }}</option>
             @endforeach
         </select>
     </div>

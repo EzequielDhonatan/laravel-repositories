@@ -34,8 +34,8 @@ class AppServiceProvider extends ServiceProvider
             ],
 
             function ($view) {
-                $view->with('categories', Category::all());
-                // $view->with('categories', Category::pluck('title', 'id'));
+                // $view->with('categories', Category::all());
+                $view->with('categories', Category::pluck('title', 'id'));
             }
         );
     }

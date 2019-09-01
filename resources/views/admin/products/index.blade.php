@@ -50,7 +50,7 @@
                         @csrf
 
                         <select class="form-control" name="category" id="category">
-                            <option value="">Categoria</option>
+                            <option value="">Selecione</option>
                             @foreach ($categories as $id => $category)
                                 <option value="{{ $id }}">{{ $category }}</option>
                             @endforeach
