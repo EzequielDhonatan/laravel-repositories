@@ -52,12 +52,15 @@
                         <select class="form-control" name="category" id="category">
                             <option value="">Selecione</option>
                             @foreach ($categories as $id => $category)
-                                <option value="{{ $id }}">{{ $category }}</option>
+                                <option value="{{ $id }}"
+                                    @if (isset($filters['category']) && $filters['category'] == $id)
+                                        selected
+                                    @endif>{{ $category }}</option>
                             @endforeach
                         </select>
                         
-                        <input class="form-control" type="text" id="name" name="name" value="{{ $data['name'] ?? '' }}" placeholder="Nome">
-                        <input class="form-control" type="text" id="price" price="name" value="{{ $data['price'] ?? '' }}" placeholder="Preço">
+                        <input class="form-control" type="text" id="name" name="name" value="{{ $filters['name'] ?? '' }}" placeholder="Nome">
+                        <input class="form-control" type="text" id="price" price="name" value="{{ $filters['price'] ?? '' }}" placeholder="Preço">
 
                         <button class="btn btn-success" type="submit">Buscar</button>
 
@@ -125,7 +128,7 @@
 
                                     <th>
                                         <a href="{{ route('products.edit', $product->id) }}">
-                                            R$ {{ $product->price }}
+                                             R$ {{ $product->price }}
                                         </a>
                                     </th>
 
