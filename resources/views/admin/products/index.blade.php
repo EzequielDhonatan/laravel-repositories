@@ -149,6 +149,12 @@
                         </tbody> <!-- tbody -->
 
                     </table> <!-- table table-striped -->
+
+                    @if (isset($filters))
+                        {!! $products->appends($filters)->links() !!}
+                    @else
+                        {!! $products->links() !!}
+                    @endif
                     
                 </div> <!-- box-body -->
             </div> <!-- box -->

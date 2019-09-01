@@ -25,7 +25,8 @@ class IndexController extends Controller
     {
         $products = $this->product->with('category')
                                     ->orderBy('id', 'DESC')
-                                    ->get();
+                                    // ->get(1);
+                                    ->paginate(1);
 
         return view('admin.products.index', compact('products'));
     }
@@ -135,6 +136,8 @@ class IndexController extends Controller
 
     public function search(Request $request)
     {
+        $filters = $request->except('_token');
+
         $products = $this->product
                             /* ->with([
                                  'category' => function ($query) use ($request) {
@@ -162,8 +165,9 @@ class IndexController extends Controller
                             })
                             // ->toSql();
                             // dd($products);
-                            ->get();
+                            // ->get();
+                            ->paginate(1);
 
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index', compact('products', 'filters'));
     }
 }
