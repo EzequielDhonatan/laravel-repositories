@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use App\Models\Admin\Category\Category;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,18 +27,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-
-        view()->composer(
-            /* ARRAY PARA SE UTLIZAR EM DIVERSAS VIEW's
+        
+        View::composer(
             [
-                'admin.products.index', // UTILIZADO APENAS PARA A VIEW INDEX'
+                'admin.products.*',
             ],
-            */
 
-            'admin.products.*', // UTLIZADO PARA TODAS AS VIEW's
             function ($view) {
-                // $view->with('categories', Category::all());
-                $view->with('categories', Category::pluck('title', 'id'));
+                $view->with('categories', Category::all());
+                // $view->with('categories', Category::pluck('title', 'id'));
             }
         );
     }
