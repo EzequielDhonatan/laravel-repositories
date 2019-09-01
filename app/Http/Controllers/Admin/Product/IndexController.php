@@ -24,9 +24,9 @@ class IndexController extends Controller
     public function index()
     {
         $products = $this->product->with('category')
-                                    ->orderBy('id', 'DESC')
+                                    // ->orderBy('id', 'DESC')
                                     // ->get(1);
-                                    ->paginate(1);
+                                    ->paginate();
 
         return view('admin.products.index', compact('products'));
     }
@@ -166,7 +166,7 @@ class IndexController extends Controller
                             // ->toSql();
                             // dd($products);
                             // ->get();
-                            ->paginate(1);
+                            ->paginate();
 
         return view('admin.products.index', compact('products', 'filters'));
     }
