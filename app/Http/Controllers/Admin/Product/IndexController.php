@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Admin\Product;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Product\Product;
 use App\Models\Admin\Category\Category;
+use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Http\Requests\Admin\Product\StoreUpdateFormRequest;
 
 class IndexController extends Controller
 {
-    protected $product;
+    protected $repository;
 
-    public function __construct(Product $product)
+    public function __construct(ProductRepositoryInterface $repository)
     {
-        $this->product = $product;
+        $this->repository = $repository;
     }
     /**
      * Display a listing of the resource.
@@ -23,7 +23,8 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $products = $this->product->with('category')
+        $products = $this->repository
+                                    // ->with('category')
                                     // ->orderBy('id', 'DESC')
                                     // ->get(1);
                                     ->paginate();
@@ -58,7 +59,7 @@ class IndexController extends Controller
         dd($product);
         */
 
-        $product = $this->product->create($request->all());
+        $product = $this->repository->create($request->all());
 
         return redirect()
                 ->route('products.index')
@@ -73,7 +74,7 @@ class IndexController extends Controller
      */
     public function show($id)
     {
-        $product = $this->product->with('category')
+        $product = $this->repository->with('category')
                                     ->where('id', $id)
                                     ->first();
 
@@ -95,7 +96,7 @@ class IndexController extends Controller
         $categories = Category::all();
         // $categories = Category::pluck('title', 'id');
 
-        if (!$product = $this->product->find($id))
+        if (!$product = $this->repository->find($id))
             return redirect()->back();
 
         return view('admin.products.edit', compact('product', 'categories'));
@@ -110,7 +111,7 @@ class IndexController extends Controller
      */
     public function update(StoreUpdateFormRequest $request, $id)
     {
-        $product = $this->product->find($id);
+        $product = $this->repository->find($id);
 
         $product->update($request->all());
 
@@ -127,7 +128,7 @@ class IndexController extends Controller
      */
     public function destroy($id)
     {
-        $product = $this->product->find($id)->delete();
+        $product = $this->repository->find($id)->delete();
 
         return redirect()
                     ->route('products.index')
@@ -138,7 +139,7 @@ class IndexController extends Controller
     {
         $filters = $request->except('_token');
 
-        $products = $this->product
+        $products = $this->repository
                             /* ->with([
                                  'category' => function ($query) use ($request) {
                                      $query->where('id', $request->category);

@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use App\Models\Admin\Category\Category;
 
+use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\Repositories\Core\Eloquent\EloquentProductRepository;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -16,7 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            ProductRepositoryInterface::class,
+            EloquentProductRepository::class,
+        );
     }
 
     /**

@@ -1,59 +1,53 @@
 <?php
 
 namespace App\Repositories\Core;
-use App\Repositories\Contracts\RepositorieInterface;
-use App\Repositories\Exceptions\NoEntityDefined;
 
-class BaseEloquentRepository implements RepositorieInterface
+use App\Repositories\Exceptions\NotEntityDefined;
+use App\Repositories\Contracts\RepositoryInterface;
+
+class BaseEloquentRepository implements RepositoryInterface
 {
-    private $entity;
+    protected $entity;
 
     public function __construct()
     {
         $this->entity = $this->resolveEntity();
     }
-
-    ## RETORNA TODOS OS REGISTROS
+    
     public function getAll()
     {
         return $this->entity->get();
     }
 
-    ## RETRONA OS DADOS PELO "ID"
     public function findById($id)
     {
         return $this->entity->find($id);
-    } 
+    }
 
-    ## RETRONA TODOS OS REGISTROS ESPECÍFICO DE UMA COLUNA
     public function findWhere($column, $valor)
     {
         return $this->entity
-                            ->where($column, $valor)
-                            ->get();
+                        ->where($column, $valor)
+                        ->get();
     }
 
-    ## RETRONA APENAS O PRIMEIRO REGISTRO DE UMA COLUNA
     public function findWhereFirst($column, $valor)
     {
         return $this->entity
-                            ->where($column, $valor)
-                            ->first();
+                        ->where($column, $valor)
+                        ->first();
     }
 
-    ## RETORNA TODOS OS DADOS PAGINADOS
     public function paginate($totalPage = 10)
     {
-        return $this->entity->paginate($totalPage = 10);
+        return $this->entity->paginate($totalPage);
     }
 
-    ## CRIA UM REGISTRO
     public function store(array $data)
     {
         return $this->entity->create($data);
     }
 
-    ## EDITA UM REGISTRO
     public function update($id, array $data)
     {
         $entity = $this->findById($id);
@@ -61,19 +55,24 @@ class BaseEloquentRepository implements RepositorieInterface
         return $entity->update($data);
     }
 
-    ## DELETA UM REGISTRO
     public function delete($id)
     {
         return $this->entity->find($id)->delete();
+    }
+    
+    public function orderBy($column, $order = 'DESC')
+    {
+        $this->entity = $this->entity->orderBy($column, $order);
+
+        return $this;
     }
 
     public function resolveEntity()
     {
         if (!method_exists($this, 'entity')) {
-            throw new NoEntityDefined;
+            throw new NotEntityDefined;
         }
 
         return app($this->entity());
     }
-
 }
