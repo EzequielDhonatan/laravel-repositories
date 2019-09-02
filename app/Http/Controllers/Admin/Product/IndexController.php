@@ -39,8 +39,8 @@ class IndexController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        // $categories = Category::pluck('title', 'id');
+        // $categories = Category::all();
+        $categories = Category::pluck('title', 'id');
 
         return view('admin.products.create', compact('categories'));
     }
@@ -59,7 +59,7 @@ class IndexController extends Controller
         dd($product);
         */
 
-        $product = $this->repository->create($request->all());
+        $this->repository->store($request->all());
 
         return redirect()
                 ->route('products.index')
@@ -74,9 +74,13 @@ class IndexController extends Controller
      */
     public function show($id)
     {
-        $product = $this->repository->with('category')
+        /*
+        $product = $this->repository
+                                    ->with('category')
                                     ->where('id', $id)
                                     ->first();
+                                    */
+        $product = $this->repository->findWhereFirst('id', $id);
 
         if (!$product)
             return redirect()
@@ -96,7 +100,7 @@ class IndexController extends Controller
         $categories = Category::all();
         // $categories = Category::pluck('title', 'id');
 
-        if (!$product = $this->repository->find($id))
+        if (!$product = $this->repository->findById($id))
             return redirect()->back();
 
         return view('admin.products.edit', compact('product', 'categories'));
@@ -111,9 +115,7 @@ class IndexController extends Controller
      */
     public function update(StoreUpdateFormRequest $request, $id)
     {
-        $product = $this->repository->find($id);
-
-        $product->update($request->all());
+        $this->repository->update($id, $request->all());
 
         return redirect()
                 ->route('products.index')
@@ -128,7 +130,7 @@ class IndexController extends Controller
      */
     public function destroy($id)
     {
-        $product = $this->repository->find($id)->delete();
+        $this->repository->delete($id);
 
         return redirect()
                     ->route('products.index')
