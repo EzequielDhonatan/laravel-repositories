@@ -13,6 +13,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth
     Route::get('/', 'Dashboard\IndexController@index')->name('admin');
 });
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['namespace' => 'Site'], function() {
+
+    ## SITE (MODULE 4.0)
+    Route::get('/', 'Home\IndexController@index');
+
 });
