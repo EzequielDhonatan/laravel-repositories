@@ -5,11 +5,18 @@ namespace App\Http\Controllers\Admin\Category;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Category\Category;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Http\Requests\Admin\Category\StoreUpdateFormRequest;
 
 class IndexController extends Controller
 {
+    protected $repository;
+
+    public function __construct(CategoryRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,11 +24,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')
-                        // ->orderBy('created_at', 'DESC')
-                        // ->orderBy('id', 'asc')
-                        ->orderBy('id', 'DESC')
-                        ->paginate();
+        $categories = $this->repository->paginate();
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -44,7 +47,7 @@ class IndexController extends Controller
      */
     public function store(StoreUpdateFormRequest $request)
     {
-        DB::table('categories')->insert([
+        $this->repository->store([
             'title'         => $request->title,
             'url'           => $request->url,
             'description'   => $request->description
@@ -64,11 +67,7 @@ class IndexController extends Controller
      */
     public function show($id)
     {
-        $category = DB::table('categories')
-                        ->where('id', $id)
-                        ->first();
-
-        if (!$category)
+        if (!$category = $this->repository->findById($id))
             return redirect()->back();
 
         return view('admin.categories.show', compact('category'));
@@ -82,9 +81,7 @@ class IndexController extends Controller
      */
     public function edit($id)
     {
-        $category = DB::table('categories')->where('id', $id)->first();
-
-        if (!$category)
+        if (!$category = $this->repository->findById($id))
             return redirect()->back();
 
         return view('admin.categories.edit', compact('category'));
@@ -99,13 +96,12 @@ class IndexController extends Controller
      */
     public function update(StoreUpdateFormRequest $request, $id)
     {
-        DB::table('categories')
-                ->where('id', $id)
-                ->update([
-                    'title'         => $request->title,
-                    'url'           => $request->url,
-                    'description'   => $request->description
-                ]);
+        $this->repository
+                        ->update($id, [
+                            'title'         => $request->title,
+                            'url'           => $request->url,
+                            'description'   => $request->description
+                        ]);
 
         return redirect()->route('categories.index')
                         ->withSuccess('Registro atualizado com sucesso!');
@@ -119,9 +115,7 @@ class IndexController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('categories')
-                ->where('id', $id)
-                ->delete();
+        $this->repository->delete($id);
 
         return redirect()->route('categories.index')
                         ->withSuccess('Registro deletado com sucesso!');
