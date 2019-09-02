@@ -7,7 +7,8 @@ use Illuminate\Database\DatabaseManager as DB;
 use App\Repositories\Contracts\RepositoryInterface;
 class BaseQueryBuilderRepository implements RepositoryInterface
 {
-    protected $tb, $db;
+    protected $tb;
+    private $db;
     
     protected $orderBy = [
         'column'    => 'id',
@@ -89,8 +90,10 @@ class BaseQueryBuilderRepository implements RepositoryInterface
         //     'column' => $column,
         //     'order' => $order,
         // ];
-        $this->orderBy['column'] = $column;
-        $this->orderBy['order'] = $order;
+
+        $this->orderBy['column']    = $column;
+        $this->orderBy['order']     = $order;
+
         return $this;
     }
 

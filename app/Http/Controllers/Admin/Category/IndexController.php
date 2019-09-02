@@ -24,7 +24,9 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $categories = $this->repository->paginate();
+        $categories = $this->repository
+                            // ->orderBy('id')
+                            ->paginate();
 
         return view('admin.categories.index', compact('categories'));
     }

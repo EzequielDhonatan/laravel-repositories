@@ -12,5 +12,5 @@ interface RepositoryInterface
     public function store(array $data); ## CRIA UM REGISTRO
     public function update($id, array $data); ## EDITA UM REGISTRO
     public function delete($id); ## DELETA UM REGISTRO
-    public function orderBy($column, $order = 'DESC'); ## ORDENA PELO ÚLTIMO REGISTRO
+    public function orderBy($column, $order = 'DESC'); ## ORDEM DECRESCENTE
 }
