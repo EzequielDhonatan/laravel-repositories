@@ -1,7 +1,6 @@
 <?php
 
-// Auth::routes(['register' => false]);
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
     
