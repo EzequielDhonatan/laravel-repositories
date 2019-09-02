@@ -141,35 +141,7 @@ class IndexController extends Controller
     {
         $filters = $request->except('_token');
 
-        $products = $this->repository
-                            /* ->with([
-                                 'category' => function ($query) use ($request) {
-                                     $query->where('id', $request->category);
-                                 }
-                            ])*/
-                            ->with('category')
-                            ->where(function ($query) use ($request) {
-
-                                if ($request->name) {
-                                    $filter = $request->name;
-                                    $query->where(function ($querySub) use ($filter) {
-                                        $querySub->where('name', 'LIKE', "%{$filter}%")
-                                                    ->orWhere('description', 'LIKE', "%{$filter}%");
-                                    });
-                                }
-
-                                if ($request->price) {
-                                    $query->where('price', $request->price);
-                                }
-
-                                if ($request->category) {
-                                    $query->orWhere('category_id', $request->category);
-                                }
-                            })
-                            // ->toSql();
-                            // dd($products);
-                            // ->get();
-                            ->paginate();
+        $products = $this->repository->search($request);
 
         return view('admin.products.index', compact('products', 'filters'));
     }

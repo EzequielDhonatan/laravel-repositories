@@ -123,42 +123,9 @@ class IndexController extends Controller
 
     public function search(Request $request) 
     {
-        // $search = $request->search;
-
-        /*
-        $categories = DB::table('categories')
-                ->where('title', $search)
-                ->orWhere('url', $search)
-                ->orWhere('description', 'LIKE', "%{$search}%")
-                ->get();
-        */
-
         $data = $request->except('_token');
 
-        $categories = DB::table('categories')
-                ->where(function ($query) use ($data) {
-
-                    // PESQUISA TÍTULO
-                    if (isset($data['title'])) {
-                        $title = $data['title'];
-                        $query->where('title', 'LIKE', "%{$title}%");
-                    }
-
-                    // PESQUISA URL
-                    if (isset($data['url'])) {
-                        $url = $data['url'];
-                        $query->where('url', 'LIKE', "%{$url}%");
-                    }
-
-                    // PESQUISA DESCRIÇÃO
-                    if (isset($data['description'])) {
-                        $description =  $data['description'];
-                        $query->where('description', 'LIKE', "%{$description}%");
-                    }
-                })
-                ->orderBy('id', 'DESC')
-                ->paginate();
-                // ->get();
+        $categories = $this->repository->search($data);
 
         return view('admin.categories.index', compact('categories', 'data'));
     }
