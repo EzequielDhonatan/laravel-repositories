@@ -7,13 +7,15 @@ use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\{
     ProductRepositoryInterface,
     CategoryRepositoryInterface,
-    ChartRepositoryInterface
+    ChartRepositoryInterface,
+    UserRepositoryInterface
 };
 
 use App\Repositories\Core\Eloquent\{
     EloquentProductRepository,
     EloquentCategoryRepository,
-    EloquentChartRepository
+    EloquentChartRepository,
+    EloquentUserRepository
 };
 
 use App\Repositories\Core\QueryBuilder\{
@@ -43,6 +45,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             ChartRepositoryInterface::class,
             EloquentChartRepository::class,
+        );
+
+        $this->app->bind(
+            UserRepositoryInterface::class,
+            EloquentUserRepository::class,
         );
     }
 
