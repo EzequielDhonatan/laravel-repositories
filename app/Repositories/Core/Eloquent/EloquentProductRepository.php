@@ -3,7 +3,6 @@
 namespace App\Repositories\Core\Eloquent;
 
 use Illuminate\Http\Request;
-
 use App\Repositories\Core\BaseEloquentRepository;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Models\Admin\Product\Product;
@@ -25,13 +24,13 @@ class EloquentProductRepository extends BaseEloquentRepository implements Produc
                                     $query->where(function ($querySub) use ($filter) {
                                         $querySub->where('name', 'LIKE', "%{$filter}%")
                                                     ->orWhere('description', 'LIKE', "%{$filter}%");
-                                    });
+                                    });     
                                 }
 
                                 if ($request->price) {
                                     $query->where('price', $request->price);
                                 }
-
+                                
                                 if ($request->category) {
                                     $query->orWhere('category_id', $request->category);
                                 }

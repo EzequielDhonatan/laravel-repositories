@@ -12,31 +12,26 @@ class EloquentCategoryRepository extends BaseEloquentRepository implements Categ
     {
         return Category::class;
     }
-
+    
     public function search(array $data)
     {
         return $this->entity
                         ->where(function ($query) use ($data) {
 
-                            // PESQUISA TÍTULO
                             if (isset($data['title'])) {
-                                $title = $data['title'];
-                                $query->where('title', 'LIKE', "%{$title}%");
+                                $query->where('title', $data['title']);
                             }
 
-                            // PESQUISA URL
                             if (isset($data['url'])) {
-                                $url = $data['url'];
-                                $query->where('url', 'LIKE', "%{$url}%");
+                                $query->orWhere('url', $data['url']);
                             }
-
-                            // PESQUISA DESCRIÇÃO
+                            
                             if (isset($data['description'])) {
-                                $description =  $data['description'];
-                                $query->where('description', 'LIKE', "%{$description}%");
+                                $desc = $data['description'];
+                                $query->where('description', 'LIKE', "%{$desc}%");
                             }
                         })
-                        ->orderBy('id', 'DESC')
+                        ->orderBy('id', 'desc')
                         ->paginate();
     }
 }

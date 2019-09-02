@@ -44,4 +44,12 @@ class QueryBuilderCategoryRepository extends BaseQueryBuilderRepository implemen
         return $this->db->table($this->tb)
                     ->insert($data);
     }
+
+    public function productsByCategoryId($id)
+    {
+        return $this->db
+                        ->table('products')
+                        ->where('category_id', $id)
+                        ->get();
+    }
 }
