@@ -59,6 +59,13 @@ class BaseEloquentRepository implements RepositoryInterface
     {
         return $this->entity->find($id)->delete();
     }
+
+    public function relationships(...$relationships)
+    {
+        $this->entity = $this->entity->with($relationships);
+
+        return $this;
+    }
     
     public function orderBy($column, $order = 'DESC')
     {

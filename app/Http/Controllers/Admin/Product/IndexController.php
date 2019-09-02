@@ -24,10 +24,8 @@ class IndexController extends Controller
     public function index()
     {
         $products = $this->repository
-                                    // ->with('category')
-                                    // ->orderBy('id', 'DESC')
-                                    // ->get(1);
-                                    ->paginate();
+                            ->relationships('category')
+                            ->paginate();
 
         return view('admin.products.index', compact('products'));
     }
