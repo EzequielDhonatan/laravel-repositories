@@ -134,13 +134,24 @@ return [
         ],
         ['header' => 'OPÇÕES'],
         [
-            'text' => 'Categorias',
-            'url'  => 'admin/categories',
+            'text'          => 'Dashboard',
+            'url'           => 'admin',
+            'icon'          => 'fas fa-tachometer',
         ],
         [
-            'text'        => 'Produtos',
-            'url'         => 'admin/products',
-            'icon'        => 'far fa-file',
+            'text'          => 'Categorias',
+            'url'           => 'admin/categories',
+            'icon'          => 'fas fa-object-group',
+        ],
+        [
+            'text'          => 'Produtos',
+            'url'           => 'admin/products',
+            'icon'          => 'fas fa-tasks',
+        ],
+        [
+            'text'          => 'Usuários',
+            'url'           => 'admin/users',
+            'icon'          => 'fas fa-users',
         ],
     ],
 
