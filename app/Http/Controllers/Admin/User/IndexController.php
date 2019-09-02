@@ -132,9 +132,9 @@ class IndexController extends Controller
     {
         $filters = $request->except('_token');
 
-        $products = $this->repository->search($request);
+        $users = $this->repository->search($request);
 
-        return view('admin.users.index', compact('products', 'filters'));
+        return view('admin.users.index', compact('users', 'filters'));
     }
 }
 

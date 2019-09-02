@@ -49,8 +49,7 @@
 
                         @csrf
                         
-                        <input class="form-control" type="text" id="name" name="name" value="{{ $data['name'] ?? '' }}" placeholder="Nome">
-                        <input class="form-control" type="text" id="email" name="email" value="{{ $data['email'] ?? '' }}" placeholder="E-mail">
+                        <input class="form-control" type="text" id="filter" name="filter" value="{{ $data['filter'] ?? '' }}" placeholder="Filtrar?">
                         <button class="btn btn-success" type="submit">Buscar</button>
 
                     </form> <!-- form form-inline -->
@@ -105,6 +104,12 @@
                                     <th>
                                         <a href="{{ route('users.edit', $user->id) }}">
                                             {{ $user->email }}
+                                        </a>
+                                    </th>
+
+                                    <th>
+                                        <a href="{{ route('users.edit', $user->id) }}">
+                                            {{ $user->description }}
                                         </a>
                                     </th>
 
