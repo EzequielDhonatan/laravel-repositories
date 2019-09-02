@@ -7,10 +7,10 @@
         <input type="text" class="form-control" id="title" name="title" value="{{ $category->title ?? old('title') }}">
     </div>
 
-    {{-- <div class="form-gourp col-md-6 col-sm-6 col-lg-6 col-xs-6">
+    <div class="form-gourp col-md-6 col-sm-6 col-lg-6 col-xs-6">
         <label for="url">URL</label>
         <input type="text" class="form-control" id="url" name="url" value="{{ $category->url ?? old('url') }}">
-    </div> --}}
+    </div>
 
 </div> <!-- row -->
 

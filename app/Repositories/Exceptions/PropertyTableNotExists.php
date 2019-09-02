@@ -6,5 +6,5 @@ use Exception;
 
 class PropertyTableNotExists extends Exception
 {
-    
+
 }

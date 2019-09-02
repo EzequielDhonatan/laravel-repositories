@@ -16,6 +16,7 @@ class IndexController extends Controller
     {
         $this->repository = $repository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,16 +39,13 @@ class IndexController extends Controller
      */
     public function create()
     {
-        // $categories = Category::all();
-        $categories = Category::pluck('title', 'id');
-
         return view('admin.products.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\Product\StoreUpdateFormRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUpdateFormRequest $request)
@@ -55,14 +53,12 @@ class IndexController extends Controller
         /*
         $category = Category::find($request->category_id);
         $product = $category->products()->create($request->all());
-        dd($product);
         */
-
-        $this->repository->store($request->all());
+        $product = $this->repository->store($request->all());
 
         return redirect()
-                ->route('products.index')
-                ->withSuccess('Cadastro realizado com sucesso!');
+                    ->route('products.index')
+                    ->withSuccess('Producto Cadastrado');
     }
 
     /**
@@ -73,17 +69,11 @@ class IndexController extends Controller
      */
     public function show($id)
     {
-        /*
-        $product = $this->repository
-                                    ->with('category')
-                                    ->where('id', $id)
-                                    ->first();
-                                    */
+        // $product = $this->repository->where('id', $id)->first();
         $product = $this->repository->findWhereFirst('id', $id);
-
+        
         if (!$product)
-            return redirect()
-                    ->back();
+            return redirect()->back();
 
         return view('admin.products.show', compact('product'));
     }
@@ -96,19 +86,16 @@ class IndexController extends Controller
      */
     public function edit($id)
     {
-        $categories = Category::all();
-        // $categories = Category::pluck('title', 'id');
-
         if (!$product = $this->repository->findById($id))
             return redirect()->back();
-
+        
         return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\Product\StoreUpdateFormRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -117,8 +104,8 @@ class IndexController extends Controller
         $this->repository->update($id, $request->all());
 
         return redirect()
-                ->route('products.index')
-                ->withSuccess('Registrado atualizado com sucesso!');
+                    ->route('products.index')
+                    ->withSuccess('Produto atualizado com sucesso');
     }
 
     /**
@@ -133,8 +120,9 @@ class IndexController extends Controller
 
         return redirect()
                     ->route('products.index')
-                    ->withSuccess('Registro deletado com sucesso!');
+                    ->withSuccess('Deletado com sucesso!');
     }
+
 
     public function search(Request $request)
     {

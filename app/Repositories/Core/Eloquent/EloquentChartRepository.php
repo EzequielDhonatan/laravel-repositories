@@ -11,5 +11,4 @@ class EloquentChartRepository extends BaseEloquentRepository implements ChartRep
     {
         // return Chart::class;
     }
-    
 }

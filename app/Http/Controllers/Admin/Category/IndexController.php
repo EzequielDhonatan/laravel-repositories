@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\Category;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Http\Requests\Admin\Category\StoreUpdateFormRequest;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 
 class IndexController extends Controller
 {
@@ -25,9 +25,10 @@ class IndexController extends Controller
     public function index()
     {
         $categories = $this->repository->orderBy('title', 'ASC')->paginate();
+
         return view('admin.categories.index', compact('categories'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -37,14 +38,13 @@ class IndexController extends Controller
     {
         return view('admin.categories.create');
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Admin\Category\StoreUpdateFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-
     public function store(StoreUpdateFormRequest $request)
     {
         $this->repository->store([
@@ -69,7 +69,7 @@ class IndexController extends Controller
 
         if (!$category)
             return redirect()->back();
-            
+
         return view('admin.categories.show', compact('category'));
     }
 
@@ -111,11 +111,9 @@ class IndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function destroy($id)
     {
         $products = $this->repository->productsByCategoryId($id);
-
         if (count($products) > 0)
             return redirect()
                     ->route('categories.index')
@@ -131,6 +129,7 @@ class IndexController extends Controller
     public function search(Request $request)
     {
         $data = $request->except('_token');
+
         $categories = $this->repository->search($data);
         
         return view('admin.categories.index', compact('categories', 'data'));

@@ -13,7 +13,7 @@ class BaseEloquentRepository implements RepositoryInterface
     {
         $this->entity = $this->resolveEntity();
     }
-    
+
     public function getAll()
     {
         return $this->entity->get();
@@ -66,7 +66,7 @@ class BaseEloquentRepository implements RepositoryInterface
 
         return $this;
     }
-    
+
     public function orderBy($column, $order = 'DESC')
     {
         $this->entity = $this->entity->orderBy($column, $order);

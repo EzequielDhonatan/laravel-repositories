@@ -17,9 +17,11 @@ class QueryBuilderCategoryRepository extends BaseQueryBuilderRepository implemen
                             if (isset($data['title'])) {
                                 $query->where('title', $data['title']);
                             }
+
                             if (isset($data['url'])) {
                                 $query->orWhere('url', $data['url']);
                             }
+
                             if (isset($data['description'])) {
                                 $desc = $data['description'];
                                 $query->where('description', 'LIKE', "%{$desc}%");
@@ -42,7 +44,8 @@ class QueryBuilderCategoryRepository extends BaseQueryBuilderRepository implemen
         $data['url'] = kebab_case($data['title']);
         
         return $this->db->table($this->tb)
-                    ->insert($data);
+                    ->where('id', $id)
+                    ->update($data);
     }
 
     public function productsByCategoryId($id)
@@ -52,4 +55,5 @@ class QueryBuilderCategoryRepository extends BaseQueryBuilderRepository implemen
                         ->where('category_id', $id)
                         ->get();
     }
+
 }

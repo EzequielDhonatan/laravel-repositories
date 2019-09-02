@@ -3,9 +3,9 @@
 namespace App\Repositories\Core;
 
 // use DB;
-use App\Repositories\Exceptions\PropertyTableNotExists;
 use Illuminate\Database\DatabaseManager as DB;
 use App\Repositories\Contracts\RepositoryInterface;
+use App\Repositories\Exceptions\PropertyTableNotExists;
 
 class BaseQueryBuilderRepository implements RepositoryInterface
 {
@@ -42,7 +42,7 @@ class BaseQueryBuilderRepository implements RepositoryInterface
                         ->orderBy($this->orderBy['column'], $this->orderBy['order'])
                         ->get();
     }
-    
+
     public function findWhereFirst($column, $valor)
     {
         return $this->db->table($this->tb)
@@ -84,18 +84,19 @@ class BaseQueryBuilderRepository implements RepositoryInterface
         //     'column' => $column,
         //     'order' => $order,
         // ];
-        $this->orderBy['column'] = $column;
-        $this->orderBy['order'] = $order;
+        $this->orderBy['column']    = $column;
+        $this->orderBy['order']     = $order;
 
         return $this;
     }
-    
+
     public function resolveTable()
     {
         if (!property_exists($this, 'table')) {
             throw new PropertyTableNotExists();
         }
-        
+
         return $this->table;
     }
+
 }
