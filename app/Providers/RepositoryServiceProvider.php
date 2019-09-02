@@ -6,12 +6,14 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Repositories\Contracts\{
     ProductRepositoryInterface,
-    CategoryRepositoryInterface
+    CategoryRepositoryInterface,
+    ChartRepositoryInterface
 };
 
 use App\Repositories\Core\Eloquent\{
     EloquentProductRepository,
-    EloquentCategoryRepository
+    EloquentCategoryRepository,
+    EloquentChartRepository
 };
 
 use App\Repositories\Core\QueryBuilder\{
@@ -36,6 +38,11 @@ class RepositoryServiceProvider extends ServiceProvider
             CategoryRepositoryInterface::class,
             // QueryBuilderCategoryRepository::class,
             EloquentCategoryRepository::class,
+        );
+
+        $this->app->bind(
+            ChartRepositoryInterface::class,
+            EloquentChartRepository::class,
         );
     }
 
