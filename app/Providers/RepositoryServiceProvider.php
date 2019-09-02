@@ -10,7 +10,8 @@ use App\Repositories\Contracts\{
 };
 
 use App\Repositories\Core\Eloquent\{
-    EloquentProductRepository
+    EloquentProductRepository,
+    EloquentCategoryRepository
 };
 
 use App\Repositories\Core\QueryBuilder\{
@@ -33,7 +34,8 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(
             CategoryRepositoryInterface::class,
-            QueryBuilderCategoryRepository::class,
+            // QueryBuilderCategoryRepository::class,
+            EloquentCategoryRepository::class,
         );
     }
 
