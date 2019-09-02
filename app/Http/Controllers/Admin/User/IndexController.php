@@ -98,7 +98,14 @@ class IndexController extends Controller
      */
     public function update(StoreUpdateFormRequest $request, $id)
     {
-        $this->repository->update($id, $request->all());
+        $data = $request->all();
+
+        if ($request->password)
+            $data['password'] = bcrypt($data['password']);
+        else
+            unset($data['password']);
+
+        $this->repository->update($id, $data);
 
         return redirect()
                     ->route('users.index')
