@@ -24,13 +24,10 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $categories = $this->repository
-                            // ->orderBy('id')
-                            ->paginate();
-
+        $categories = $this->repository->orderBy('title', 'ASC')->paginate();
         return view('admin.categories.index', compact('categories'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -40,25 +37,24 @@ class IndexController extends Controller
     {
         return view('admin.categories.create');
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\Category\StoreUpdateFormRequest  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(StoreUpdateFormRequest $request)
     {
         $this->repository->store([
             'title'         => $request->title,
-            'url'           => $request->url,
-            'description'   => $request->description
+            'description'   => $request->description,
         ]);
 
-        return redirect()->route('categories.index')
-                        ->withSuccess('Cadastro realizado com sucesso!');
-                        // ->withError('Ops, Algo errado!');
-                        // ->withWarning('Ops, Perigo detectado!');
+        return redirect()
+                    ->route('categories.index')
+                    ->withSuccess('Cadastro realizado com sucesso');
     }
 
     /**
@@ -69,9 +65,11 @@ class IndexController extends Controller
      */
     public function show($id)
     {
-        if (!$category = $this->repository->findById($id))
-            return redirect()->back();
+        $category = $this->repository->findById($id);
 
+        if (!$category)
+            return redirect()->back();
+            
         return view('admin.categories.show', compact('category'));
     }
 
@@ -92,21 +90,19 @@ class IndexController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\Category\StoreUpdateFormRequest  $request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(StoreUpdateFormRequest $request, $id)
     {
         $this->repository
-                        ->update($id, [
-                            'title'         => $request->title,
-                            'url'           => $request->url,
-                            'description'   => $request->description
-                        ]);
-
-        return redirect()->route('categories.index')
-                        ->withSuccess('Registro atualizado com sucesso!');
+                ->update($id, [
+                    'title'         => $request->title,
+                    'description'   => $request->description,
+                ]);
+                
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -115,20 +111,28 @@ class IndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
+        $products = $this->repository->productsByCategoryId($id);
+
+        if (count($products) > 0)
+            return redirect()
+                    ->route('categories.index')
+                    ->with('message', 'Não pode deletar porque exitem produtos vinculados a essa categoria.');
+
         $this->repository->delete($id);
 
-        return redirect()->route('categories.index')
-                        ->withSuccess('Registro deletado com sucesso!');
+        return redirect()
+                    ->route('categories.index')
+                    ->withSuccess('Categoria deletada com sucesso');
     }
 
-    public function search(Request $request) 
+    public function search(Request $request)
     {
         $data = $request->except('_token');
-
         $categories = $this->repository->search($data);
-
+        
         return view('admin.categories.index', compact('categories', 'data'));
     }
 }
