@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Detalhes do usuário')
+@section('title', "Detalhes do usuário {$user->name} ")
 
 @section('content_header')
 
@@ -24,7 +24,7 @@
 
         <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
 
-        <h1>Detalhes do usuário: {{ $user->title }}</h1>
+        <h1>Detalhes do usuário: {{ $user->name }}</h1>
 
         </div>
 
@@ -46,8 +46,8 @@
                         <div class="form-gourp col-md-12 col-sm-12 col-lg-12 col-xs-12">
 
                             <p><strong>ID:</strong> {{ $user->id }}</p>
-                            <p><strong>Nome:</strong> {{ $user->title }}</p>
-                            <p><strong>E-mail:</strong> {{ $user->url }}</p>
+                            <p><strong>Nome:</strong> {{ $user->name }}</p>
+                            <p><strong>E-mail:</strong> {{ $user->email }}</p>
 
                         </div>
 
